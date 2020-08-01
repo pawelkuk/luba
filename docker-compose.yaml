@@ -14,6 +14,16 @@ services:
       - 8000:8000
     depends_on:
       - db
+  app:
+    build: ./app
+    command: npm start
+    ports:
+      - 3000:3000
+    environment:
+      - CI=true
+    volumes:
+      - ./app:/app
+      - /app/node_modules
   db:
     image: postgres:11
     volumes:

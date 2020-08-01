@@ -1,3 +1,5 @@
 django
 Pillow
 psycopg2
+djangorestframework
+django-cors-headers
