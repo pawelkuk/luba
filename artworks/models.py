@@ -41,6 +41,14 @@ class Artwork(models.Model):
         return self.title
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to="images")
+    is_main_image = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.pk} {self.image.name} {self.is_main_image}"
+
+
 class ConcreteArtwork(models.Model):
     creation_date = models.DateField()
     technique = models.ForeignKey(Technique, on_delete=models.SET_NULL, null=True)
@@ -56,17 +64,8 @@ class ConcreteArtwork(models.Model):
         ("OTHER", "Other"),
     ]
     category = models.CharField(max_length=10, choices=CATEGORIES, default="GRAPHIC")
+    images = models.ManyToManyField(Image, related_name="image_list", blank=True)
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.concrete_artwork.title
-
-
-class Image(models.Model):
-    concrete_artwork = models.ForeignKey(
-        ConcreteArtwork, on_delete=models.SET_NULL, null=True
-    )
-    image = models.ImageField(upload_to="images")
-    is_main_image = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.concrete_artwork=} {self.is_main_image=}"

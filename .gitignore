@@ -1,6 +1,7 @@
 # JPEG
 *.jpg
-
+*.jpeg
+*.JPG
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
