@@ -47,7 +47,7 @@ class ConcreteArtwork(models.Model):
     format = models.ForeignKey(Format, on_delete=models.SET_NULL, null=True)
     material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True)
     concrete_artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE)
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     CATEGORIES = [
         ("GRAPHIC", "Graphic"),
         ("POSTCARD", "Postcard"),
@@ -55,10 +55,10 @@ class ConcreteArtwork(models.Model):
         ("ZINE", "Zine"),
         ("OTHER", "Other"),
     ]
-    category = models.CharField(max_length=10, choices=CATEGORIES, default="GRAPHIC",)
+    category = models.CharField(max_length=10, choices=CATEGORIES, default="GRAPHIC")
 
     def __str__(self):
-        return self.concrete_artwork
+        return self.concrete_artwork.title
 
 
 class Image(models.Model):

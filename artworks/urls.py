@@ -1,7 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("", view=views.ArtworkListView.as_view()),
-    path("<int:pk>/", view=views.ArtworkDetailView.as_view()),
-]
+router = DefaultRouter()
+router.register(r"", views.ArtworkViewSet)
+
+
+urlpatterns = [path("", include(router.urls))]

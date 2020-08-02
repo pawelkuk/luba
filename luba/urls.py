@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("artworks/", include("artworks.urls")),
     path("ping/", views.ping),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
