@@ -1,20 +1,36 @@
 from artworks import models
 import datetime
+from django.core.files import File
 import random
+import requests
+import shutil
+import pathlib
 
 author = models.Author()
 author.name = "Karolina Lubaszko"
 author.save()
 
 images = []
+path = pathlib.Path("/code/media/tmp")
+path.mkdir()
+
 for i in range(1, 15):
+    r = requests.get("https://picsum.photos/300", stream=True)
+    print(f"{i} / 14")
+    if r.status_code == 200:
+        with open(path / f"img{i}.jpg", "wb") as f:
+            for chunk in r.iter_content(1024):
+                f.write(chunk)
     img = models.Image()
     img.is_main_image = i % 2 == 0
-    img.save("/Users/pawkuk/Pictures/test{i}.jpg")
+    img.image = File(open(path / f"img{i}.jpg", "rb"), name=f"img{i}.jpg")
+    img.save()
     images.append(img)
+shutil.rmtree(path)
+
 
 techniques = [
-    "oil pait",
+    "oil paint",
     "sitodruk",
     "wycinanka",
     "spray",
