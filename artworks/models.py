@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class Format(models.Model):
@@ -50,6 +51,8 @@ class Image(models.Model):
 
 
 class ConcreteArtwork(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     creation_date = models.DateField()
     technique = models.ForeignKey(Technique, on_delete=models.SET_NULL, null=True)
     format = models.ForeignKey(Format, on_delete=models.SET_NULL, null=True)
