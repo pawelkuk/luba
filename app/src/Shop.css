@@ -1,0 +1,10 @@
+.shopping-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-column-gap: 60px;
+  grid-row-gap: 60px;
+}
+
+.shopping-list img {
+  width: 100%;
+}

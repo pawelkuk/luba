@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ArtworkThumbnail from "./ArtworkThumbnail";
 import axios from "axios";
+import "./Shop.css";
 
 const useStateWithLocalStorage = (localStorageKey) => {
   const [value, setValue] = useState(
@@ -42,8 +43,7 @@ function Shop() {
   return (
     <div className="shopping-list">
       {artworks
-        ? // ? artworks.map((artwork) => console.log(artwork.images[0].image)} />)
-          artworks.map((artwork) => <ArtworkThumbnail artwork={artwork} />)
+        ? artworks.map((artwork) => <ArtworkThumbnail artwork={artwork} />)
         : "not found"}
       {/* <h1>
         <Link to={`/shop/${1}`}>
