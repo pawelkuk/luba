@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import Nav from "./Nav";
 import About from "./About";
 import Shop from "./Shop";
@@ -7,8 +8,27 @@ import Contact from "./Contact";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+const useStateWithLocalStorage = (localStorageKey) => {
+  const [value, setValue] = useState(
+    new Map(JSON.parse(localStorage.getItem(localStorageKey))) || new Map()
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(Array.from(value.entries()))
+    );
+  }, [value, localStorageKey]);
+
+  return [value, setValue];
+};
 
 function App() {
+  const [cart, setCart] = useStateWithLocalStorage("cart");
+  const handleCartChange = (id) => {
+    cart.set(id, cart.get(id) ? cart.get(id) + 1 : 1);
+    setCart(new Map(cart));
+  };
   return (
     <Router>
       <div className="app">
@@ -17,7 +37,16 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/shop" exact component={Shop} />
-          <Route path="/shop/:id" component={ArtworkDetail} />
+          <Route
+            path="/shop/:id"
+            render={(props) => (
+              <ArtworkDetail
+                {...props}
+                cart={cart}
+                onCartChange={handleCartChange}
+              />
+            )}
+          />
           <Route path="/contact" component={Contact} />
         </Switch>
       </div>

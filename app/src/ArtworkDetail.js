@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AddToCart from "./AddToCart";
 import axios from "axios";
 function ArtworkDetail(props) {
   const API_ENDPOINT = `http://0.0.0.0:8000/concrete-artwork/${props.match.params.id}/`;
@@ -7,7 +8,6 @@ function ArtworkDetail(props) {
     axios.get(API_ENDPOINT).then((res) => setArtwork(res.data));
   }, [API_ENDPOINT]);
   const format = artwork.format;
-  console.log(artwork);
   return (
     <div>
       <div>Creation date: {artwork.creation_date || "not found"}</div>
@@ -19,6 +19,11 @@ function ArtworkDetail(props) {
         Material: {artwork.material ? artwork.material.name : "not found"}
       </div>
       <div>Category: {artwork ? artwork.category : "not found"}</div>
+      <AddToCart
+        cart={props.cart}
+        onCartChange={props.onCartChange}
+        id={props.match.params.id}
+      />
     </div>
   );
 }
