@@ -49,6 +49,7 @@ class ConcreteArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ConcreteArtwork
         fields = [
+            "id",
             "creation_date",
             "price",
             "category",
