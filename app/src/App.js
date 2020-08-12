@@ -5,6 +5,7 @@ import About from "./About";
 import Shop from "./Shop";
 import ArtworkDetail from "./ArtworkDetail";
 import Contact from "./Contact";
+import Cart from "./Cart";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/shop" exact component={Shop} />
+
           <Route
             path="/shop/:id"
             render={(props) => (
@@ -45,6 +47,12 @@ function App() {
                 cart={cart}
                 onCartChange={handleCartChange}
               />
+            )}
+          />
+          <Route
+            path="/cart"
+            render={(props) => (
+              <Cart {...props} cart={cart} onCartChange={handleCartChange} />
             )}
           />
           <Route path="/contact" component={Contact} />
