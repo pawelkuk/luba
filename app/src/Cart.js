@@ -29,7 +29,7 @@ function Cart({ cart }) {
   }, [cart]);
   return (
     <>
-      {cartItems}
+      {cartItems.length ? cartItems : "Cart is empty"}
       <div>Checkout sum price: {checkoutSum} zł</div>
       <Checkout />
     </>
