@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ArtworkThumbnail from "./ArtworkThumbnail";
+import ArtworkThumbnail from "../ArtworkThumbnail";
 import axios from "axios";
-import "./Shop.css";
+import "./style.css";
 
 function Shop() {
   const API_ENDPOINT = `http://0.0.0.0:8000/concrete-artwork/`;

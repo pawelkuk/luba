@@ -8,7 +8,7 @@ function Cart({ cart }) {
   const [artworks, setArtworks] = useState([]);
   const [checkoutSum, setCheckoutSum] = useState(0);
   useEffect(() => {
-    for (const [uuid, quantity] of cart) {
+    for (const [uuid] of cart) {
       const API_ENDPOINT = `http://0.0.0.0:8000/concrete-artwork/${uuid}/`;
       axios
         .get(API_ENDPOINT)

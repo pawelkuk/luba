@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import Nav from "./Nav";
-import About from "./About";
-import Shop from "./Shop";
-import ArtworkDetail from "./ArtworkDetail";
-import Contact from "./Contact";
-import Cart from "./Cart";
+import Nav from "../Nav/index";
+import About from "../About";
+import Shop from "../Shop/index";
+import ArtworkDetail from "../ArtworkDetail";
+import Contact from "../Contact";
+import Cart from "../Cart";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+import "./style.css";
 const useStateWithLocalStorage = (localStorageKey) => {
   const [value, setValue] = useState(
     new Map(JSON.parse(localStorage.getItem(localStorageKey))) || new Map()
