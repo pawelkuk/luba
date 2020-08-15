@@ -68,6 +68,7 @@ for i in range(1, 15):
 
 for img, artwork in zip(images, artworks):
     ca = models.ConcreteArtwork()
+    ca.stock = random.randint(5, 10)
     ca.creation_date = datetime.datetime.now()
     ca.concrete_artwork = artwork
     ca.material = material

@@ -59,4 +59,5 @@ class ConcreteArtworkSerializer(serializers.ModelSerializer):
             "material",
             "images",
             "author",
+            "stock",
         ]

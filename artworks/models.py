@@ -52,7 +52,6 @@ class Image(models.Model):
 
 class ConcreteArtwork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     creation_date = models.DateField()
     technique = models.ForeignKey(Technique, on_delete=models.SET_NULL, null=True)
     format = models.ForeignKey(Format, on_delete=models.SET_NULL, null=True)
@@ -69,6 +68,7 @@ class ConcreteArtwork(models.Model):
     category = models.CharField(max_length=10, choices=CATEGORIES, default="GRAPHIC")
     images = models.ManyToManyField(Image, related_name="image_list", blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
+    stock = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.concrete_artwork.title

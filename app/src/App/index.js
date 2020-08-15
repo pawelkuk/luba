@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import Nav from "../Nav/index";
 import About from "../About";
 import Shop from "../Shop/index";
@@ -27,8 +27,17 @@ const useStateWithLocalStorage = (localStorageKey) => {
 function App() {
   const [cart, setCart] = useStateWithLocalStorage("cart");
   const handleCartChange = (id) => {
-    cart.set(id, cart.get(id) ? cart.get(id) + 1 : 1);
-    setCart(new Map(cart));
+    const API_ENDPOINT = `http://0.0.0.0:8000/concrete-artwork/${id}/`;
+    axios
+      .get(API_ENDPOINT)
+      .then((res) => res.data)
+      .then((artwork) => {
+        let nInStock = cart.get(id) ? cart.get(id) : 0;
+        if (artwork.stock > nInStock) {
+          cart.set(id, nInStock + 1);
+          setCart(new Map(cart));
+        }
+      });
   };
   return (
     <Router>
